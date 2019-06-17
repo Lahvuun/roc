@@ -21,6 +21,10 @@ def AddDistfile(env, prefix, subdir, target):
                 shutil.rmtree(dst)
             shutil.copytree(src, dst)
         else:
+            try:
+                os.mkdir(os.path.dirname(dst))
+            except OSError:
+                pass
             shutil.copy(src, dst)
 
     def uninstall(target, source, env):
